@@ -1,0 +1,89 @@
+<?xml version="1.0" ?>
+<launch>
+
+  <arg name="robot_ip" default="172.16.0.2" />
+  <arg name="load_gripper" default="true" />
+
+  <include file="$(find fr3_moveit_config)/launch/franka_control_fr3.launch">
+        <arg name="robot_ip" value="172.16.0.2"/> 
+        <arg name="load_gripper" value="true"/>
+        <!-- <arg name="use_rviz" value="false"/> -->
+  </include>  
+
+  <!-- Set some project specific defaults for the panda arm. -->
+  <!-- <node name="set_robot_defaults" pkg="franka_control_wrappers" type="set_panda_defaults.py" respawn="false" output="screen"/> -->
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="virtual_joint_broadcaster" args="0 0 0 0 0 0 world fr3_link0" />
+
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="tcp2refcolor" args="-0.05303482385401764 0.019203705633368953 -0.03602096672336565 -0.0049776395333438785 -0.7149101615713925 -0.0019374105516641838 0.6991959170554385 fr3_hand_tcp ref_frame"/> 
+  <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="ref2camlink" args="0 0 0 -0.5 0.5 -0.5 -0.5 ref_frame camera_link"/> -->
+
+  <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="base2refdepth" args="0.7694053897186034 0.6957756804965156 0.49014575452098896 -0.35833345616228685 -0.7855422823348154 0.46732643469333923 0.19006961960242644 fr3_link0 ref_frame"/> -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="ref2camlink" args="0.000 -0.015 -0.000 0.00 0.00, 0.00 1.000 ref_frame camera_link"/>
+
+  <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="ref2camlink" args="0 -0.015 0 -0.499 0.499 -0.501 -0.501 ref_frame camera_link"/> -->
+  <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="base2refdepth" args="0.8333 0.8867 0.5827 -0.3355 -0.8184 0.4198 0.2037 fr3_link0 camera"/> -->
+
+  <rosparam command="load" file="/home/pinhao/vgn/config/panda.yaml" />
+
+  <!-- <include file="$(find franka_control_wrappers)/launch/cartesian_velocity_controller.launch">
+    <arg name="stopped" value="true" />
+  </include> -->
+
+  <!-- <rosparam command="load" file="$(find franka_ros_controllers)/config/ros_controllers.yaml" />
+  <rosparam command="load" file="$(find franka_interface)/config/robot_config.yaml" /> -->
+  <!-- <node unless="$(arg stopped)" name="controller_spawner_jv" pkg="controller_manager" type="spawner" respawn="false" output="screen"  args="cartesian_velocity_node_controller"/> -->
+  <!-- <include file="$(find franka_control_wrappers)/launch/joint_velocity_controller.launch">
+    <arg name="stopped" value="true" />
+  </include> -->
+
+
+  <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+    <!-- <arg name="align_depth" value="true" /> -->
+    <!-- <arg name="color_width" value="848" />
+    <arg name="color_height" value="480" />
+    <arg name="color_fps" value="30" /> -->
+    <!-- <arg name="depth_width" value="848" />
+    <arg name="depth_height" value="480" />
+    <arg name="depth_fps" value="6" /> -->
+    <!-- <arg name="filters" value="temporal"/> -->
+    <!-- <arg name="enable_pointcloud" value="true"/> -->
+  </include>
+
+
+  <arg name="markerId"        default="2"/>      <!-- set your marker id -->
+  <arg name="markerSize"      default="0.07"/>    <!-- in m -->
+  <arg name="eye"             default="left"/>
+  <arg name="marker_frame"    default="aruco_marker_frame"/>
+  <arg name="ref_frame"       default=""/>  <!-- leave empty and the pose will be published wrt param parent_name -->
+  <arg name="corner_refinement" default="LINES" /> <!-- NONE, HARRIS, LINES, SUBPIX -->    
+  <arg name="camera_frame" default="camera_color_optical_frame" />
+  <!-- <arg name="camera_frame" default="camera_color_frame" /> -->
+  <arg name="camera_image_topic" default="/camera/color/image_raw" />
+  <arg name="camera_info_topic" default="/camera/color/camera_info" /> 
+
+  <!-- <node pkg="aruco_ros" type="single" name="aruco_single">
+      <remap to="$(arg camera_info_topic)" from="/camera_info" />
+      <remap to="$(arg camera_image_topic)" from="/image" />
+      <param name="image_is_rectified" value="True"/>
+      <param name="marker_size"        value="$(arg markerSize)"/>
+      <param name="marker_id"          value="$(arg markerId)"/>
+      <param name="reference_frame"    value="$(arg ref_frame)"/>
+      <param name="camera_frame"       value="$(arg camera_frame)"/>
+      <param name="marker_frame"       value="$(arg marker_frame)" />
+      <param name="corner_refinement"  value="$(arg corner_refinement)" />
+  </node> -->
+
+  <!-- <include file="$(find charuco_detector)/launch/charuco_detector.launch"> 
+        <arg name="squares_sides_size_in_meters" default="0.040" />
+        <arg name="markers_sides_size_in_meters" default="0.030" />
+        <arg name="number_of_squares_in_x" default="5" />
+        <arg name="number_of_squares_in_y" default="7" />
+        <arg name="number_of_markers" default="17" />
+        <arg name="number_of_bits_for_markers_sides" default="4" />
+        <arg name="dictionary_id" default="3" />
+    </include> -->
+
+
+</launch>
