@@ -6,12 +6,12 @@ import sensor_msgs.msg
 import sys
 from dougsm_helpers.ros_control import ControlSwitcher
 from geometry_msgs.msg import Twist
-from vgn import vis
-from vgn.perception import *
-from vgn.utils.transform import Rotation, Transform
+from utils_exp import vis
+from utils_exp.perception import *
+from utils_exp.transform import Rotation, Transform
 from grasp_planner.edgegrasp import EdgeGraspPlanner, EdgeGraspObservation
 from grasp_planner.edgegraspnet import EdgeGrasper
-from vgn.grasp import Grasp
+from utils_exp.grasp import Grasp
 
 from threading import Thread, Lock
 from observer import PCLServer

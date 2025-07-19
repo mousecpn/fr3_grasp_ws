@@ -22,23 +22,12 @@ from vgn.utils.transform import Rotation, Transform
 from vgn.utils.panda_control import PandaCommander
 from vgn.detection_implicit import VGNImplicit
 from vgn.detection_diff import GIGADiff
-from vgn.utils import visual
-import matplotlib.pyplot as plt
-import roboticstoolbox as rtb
-from spatialmath import SE3
-from std_srvs.srv import Empty
 
-import spatialmath as sm
-import qpsolvers as qp
-from threading import Thread, Lock
-import spatialgeometry as sg
 from fr3_grasp_eyeonbase import TSDFServer
-from igd.utils.visual import grasp2mesh
 import sys
 sys.path.append('/home/pinhao/icg_benchmark')
 from utils_exp.visualization import trimesh_to_open3d
 
-from icg_benchmark.models.edge_grasp.edge_grasper import EdgeGrasper
 from base_fr3_grasp import BasePandaGraspController
 from utils_exp.control import calculate_velocity
 

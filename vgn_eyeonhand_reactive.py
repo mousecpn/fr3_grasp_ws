@@ -9,21 +9,18 @@ import sensor_msgs.msg
 import sys
 from dougsm_helpers.ros_control import ControlSwitcher
 from geometry_msgs.msg import Twist
-from vgn import vis
-from vgn.experiments.clutter_removal import State
-from vgn.detection import VGN, VGN_RVIZ
-from vgn.perception import *
-from vgn.utils.transform import Rotation, Transform
+from utils_exp import State
+from utils_exp import vis
+from utils_exp.perception import *
+from utils_exp.transform import Rotation, Transform
 from utils_exp.panda_control import PandaCommander
-from vgn.detection_implicit import VGNImplicit
-from vgn.detection_diff import GIGADiff
+
 
 from threading import Thread, Lock
 from fr3_grasp_eyeonbase import TSDFServer
-from igd.utils.visual import grasp2mesh
 import sys
 sys.path.append('/home/pinhao/icg_benchmark')
-sys.path.append('/home/pinhao/IGDv2')
+sys.path.append('/home/pinhao/Equivariant-Volumetric-Grasping')
 from utils_exp.visualization import trimesh_to_open3d
 from model.grasp_planner import VGNImplicit as EquiVGNImplicit
 
@@ -34,6 +31,8 @@ class PandaGraspController(BasePandaGraspController):
         super(PandaGraspController, self).__init__()
         self.tsdf_server = TSDFServer(cam_topic_name='/camera/depth/image_rect_raw',color_topic_name='/camera/color/image_rect_raw')
         if args.model_name == "vgn":
+            from vgn.detection_implicit import VGNImplicit
+            from vgn.detection_diff import GIGADiff
             self.plan_grasps = VGN_RVIZ(args.model, rviz=True, qual_th=0.7, best=False, force_detection=True)
         elif args.model_name == "giga":
             self.plan_grasps = VGNImplicit(args.model, "giga", best=True, force_detection=True, qual_th=0.3, out_th=0.1)

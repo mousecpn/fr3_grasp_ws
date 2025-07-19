@@ -9,13 +9,11 @@ import numpy as np
 import rospy
 import sensor_msgs.msg
 
-from vgn import vis
-from vgn.experiments.clutter_removal import State
-from vgn.detection import VGN, VGN_RVIZ
-from vgn.perception import *
-from vgn.utils import ros_utils
-from vgn.utils.transform import Rotation, Transform
-from vgn.grasp import Grasp
+from utils_exp import vis
+from utils_exp import vis
+from utils_exp.perception import *
+from utils_exp.transform import Rotation, Transform
+from utils_exp.grasp import Grasp
 
 import matplotlib.pyplot as plt
 import roboticstoolbox as rtb

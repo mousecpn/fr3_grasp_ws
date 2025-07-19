@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>franka_control_wrappers</name>
+  <version>0.0.0</version>
+  <description>Wrappers based on the franka_ros package to allow higher level control interfaces.</description>
+
+  <maintainer email="doug.morrison@roboticvision.org">Doug Morrison</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>franka_hw</depend>
+  <depend>franka_msgs</depend>
+  <depend>controller_interface</depend>
+  <depend>geometry_msgs</depend>
+  <depend>hardware_interface</depend>
+  <depend>libfranka</depend>
+  <depend>pluginlib</depend>
+  <depend>realtime_tools</depend>
+  <depend>roscpp</depend>
+  <depend>panda_moveit_config</depend>
+
+  <exec_depend>franka_control</exec_depend>
+  <exec_depend>franka_description</exec_depend>
+  <exec_depend>franka_gripper</exec_depend>
+  <exec_depend>message_runtime</exec_depend>
+  <exec_depend>rospy</exec_depend>
+
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+    <controller_interface plugin="${prefix}/franka_control_wrappers_plugin.xml"/>
+  </export>
+</package>

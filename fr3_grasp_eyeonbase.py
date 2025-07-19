@@ -16,22 +16,17 @@ import sensor_msgs.msg
 import sys
 # sys.path.append("/home/pinhao/Desktop/DREDS/SwinDRNet")
 
-from vgn import vis
-from vgn.experiments.clutter_removal import State
+from utils_exp import vis
+from utils_exp import State
 from vgn.detection import VGN, VGN_RVIZ
 from vgn.perception import *
 from vgn.utils import ros_utils
 from vgn.utils.transform import Rotation, Transform
-from vgn.utils.panda_control import PandaCommander
+from utils_exp.panda_control import PandaCommander
 from vgn.detection_implicit import VGNImplicit
 from vgn.detection_diff import GIGADiff
 import trimesh
-from vgn.utils import visual
-import matplotlib.pyplot as plt
-import roboticstoolbox as rtb
-from spatialmath import SE3
-from std_srvs.srv import Empty
-from std_msgs.msg import Empty as Emptymsg
+
 from observer import TSDFServer, PCLServer
 from base_fr3_grasp import BasePandaGraspController
 
