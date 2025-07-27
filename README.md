@@ -1,4 +1,4 @@
-# The Real World Experiment of Equivariance Makes Volumetric Grasping Great Again
+# The Real World Experiment of Equivariant Volumetric Grasping
 The code is based on ROS1. Since our system is fully upgraded to ROS2, it is impossible for us to test and maintain the repo anymore. The code is just for a reference and study.
 
 ## 🔧 Installation
